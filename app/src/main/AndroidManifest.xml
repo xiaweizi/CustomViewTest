@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PathMeasureActivity" />
-        <activity android:name=".VectorActivity"></activity>
+        <activity android:name=".VectorActivity" />
+        <activity android:name=".PaintActivity"></activity>
     </application>
 
 </manifest>
