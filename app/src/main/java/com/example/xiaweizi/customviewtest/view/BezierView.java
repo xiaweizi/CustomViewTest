@@ -79,6 +79,12 @@ public class BezierView extends View {
         canvas.drawLine(controlX, controlY, endX, endY, mPaint);
     }
 
+    public void reset() {
+        controlX = 250;
+        controlY = 250;
+        invalidate();
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         controlX = (int) event.getX();
