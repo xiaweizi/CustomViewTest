@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt1).setOnClickListener(this);
         findViewById(R.id.bt2).setOnClickListener(this);
         findViewById(R.id.bt3).setOnClickListener(this);
+        findViewById(R.id.bt4).setOnClickListener(this);
     }
 
     @Override
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt3:
                 startActivity(new Intent(this, PaintActivity.class));
+                break;
+            case R.id.bt4:
+                startActivity(new Intent(this, BezierActivity.class));
                 break;
         }
     }
