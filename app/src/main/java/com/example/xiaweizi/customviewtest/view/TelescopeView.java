@@ -46,7 +46,7 @@ public class TelescopeView extends View {
     }
 
     private void initView(Context context, AttributeSet attrs, int defStyle) {
-        mPaint = new Paint();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
         mShader = new BitmapShader(mBitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         mPaint.setShader(mShader);
@@ -56,6 +56,10 @@ public class TelescopeView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mTouchX != -1 && mTouchY != -1) {
+            mTouchX = mTouchX <= 200 ? 200 : mTouchX;
+            mTouchX = mTouchX >= getWidth() - 200 ? getWidth() - 200 : mTouchX;
+            mTouchY = mTouchY <= 200 ? 200 : mTouchY;
+            mTouchY = mTouchY >= getHeight() - 200 ? getHeight() - 200 : mTouchY;
             canvas.drawCircle(mTouchX, mTouchY, 200, mPaint);
         }
     }
