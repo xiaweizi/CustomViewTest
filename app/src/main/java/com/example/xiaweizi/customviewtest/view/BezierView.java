@@ -87,6 +87,7 @@ public class BezierView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
         controlX = (int) event.getX();
         controlY = (int) event.getY();
         invalidate();

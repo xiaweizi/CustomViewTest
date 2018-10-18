@@ -71,6 +71,12 @@ public class BezierGestureTrackView extends View {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return super.dispatchTouchEvent(event);
+    }
+
     public void reset() {
         mPath.reset();
         invalidate();

@@ -58,14 +58,20 @@ public class NormalGestureTrackView extends View {
             case MotionEvent.ACTION_MOVE:
                 mPath.lineTo(event.getX(), event.getY());
                 postInvalidate();
-                break;
+                return true;
         }
-        return super.onTouchEvent(event);
+        return true;
     }
 
     public void reset() {
         mPath.reset();
         invalidate();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
