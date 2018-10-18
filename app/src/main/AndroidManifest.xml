@@ -19,7 +19,8 @@
         <activity android:name=".PathMeasureActivity" />
         <activity android:name=".VectorActivity" />
         <activity android:name=".PaintActivity" />
-        <activity android:name=".BezierActivity"></activity>
+        <activity android:name=".BezierActivity" />
+        <activity android:name=".TelescopeActivity"></activity>
     </application>
 
 </manifest>

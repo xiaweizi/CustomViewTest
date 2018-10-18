@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt2).setOnClickListener(this);
         findViewById(R.id.bt3).setOnClickListener(this);
         findViewById(R.id.bt4).setOnClickListener(this);
+        findViewById(R.id.bt5).setOnClickListener(this);
     }
 
     @Override
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt4:
                 startActivity(new Intent(this, BezierActivity.class));
+                break;
+            case R.id.bt5:
+                startActivity(new Intent(this, TelescopeActivity.class));
                 break;
         }
     }
