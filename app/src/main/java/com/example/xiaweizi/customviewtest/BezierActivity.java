@@ -7,6 +7,7 @@ import android.view.View;
 import com.example.xiaweizi.customviewtest.view.BezierGestureTrackView;
 import com.example.xiaweizi.customviewtest.view.BezierView;
 import com.example.xiaweizi.customviewtest.view.NormalGestureTrackView;
+import com.example.xiaweizi.customviewtest.view.WaveView;
 
 public class BezierActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class BezierActivity extends AppCompatActivity {
                 ((NormalGestureTrackView) findViewById(R.id.normal_gesture_track)).reset();
                 ((BezierGestureTrackView) findViewById(R.id.bezier_gesture_track)).reset();
                 ((BezierView) findViewById(R.id.bezier_view)).reset();
+                ((WaveView) findViewById(R.id.wave_view)).start();
             }
         });
     }

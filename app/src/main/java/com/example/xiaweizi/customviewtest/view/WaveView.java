@@ -1,0 +1,103 @@
+package com.example.xiaweizi.customviewtest.view;
+
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.animation.LinearInterpolator;
+
+/**
+ * <pre>
+ *     author : xiaweizi
+ *     class  : com.example.xiaweizi.customviewtest.view.WaveView
+ *     e-mail : 1012126908@qq.com
+ *     time   : 2018/10/18
+ *     desc   :
+ * </pre>
+ */
+
+public class WaveView extends View {
+
+    private static final String TAG = "WaveView::";
+
+    private Paint mPaint;
+    private Path mPath = new Path();
+    private int mWidth;
+    private int mHeight;
+    private int mItemWidth = 1800;
+    private int offsetX;
+    private ValueAnimator mAnimator;
+
+    private void initPaint() {
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.FILL);
+    }
+
+    public WaveView(Context context) {
+        this(context, null);
+    }
+
+    public WaveView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public WaveView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        initView(context, attrs, defStyle);
+        setLayerType(LAYER_TYPE_HARDWARE, null);
+    }
+
+    private void initAnimator() {
+        mAnimator = ValueAnimator.ofInt(0, mItemWidth);
+        mAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        mAnimator.setDuration(2000);
+        mAnimator.setInterpolator(new LinearInterpolator());
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                offsetX = (int) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        mPath.reset();
+        int startX = -mItemWidth + offsetX;
+        int startY = mHeight / 2;
+        int controlHeight = mHeight / 2;
+        int halfWaveWidth = mItemWidth / 2;
+        mPath.moveTo(startX, startY);
+        for (int i = startX, j = 0; i < mWidth + mItemWidth; i+=mItemWidth, j ++) {
+            mPath.rQuadTo(halfWaveWidth / 2, -controlHeight, halfWaveWidth, 0);
+            mPath.rQuadTo(halfWaveWidth / 2, controlHeight, halfWaveWidth, 0);
+        }
+        mPath.lineTo(mWidth, mHeight);
+        mPath.lineTo(0, mHeight);
+        mPath.close();
+        canvas.drawPath(mPath, mPaint);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        mWidth = getMeasuredWidth();
+        mHeight = getMeasuredHeight();
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    private void initView(Context context, AttributeSet attrs, int defStyle) {
+        initPaint();
+        initAnimator();
+    }
+
+    public void start() {
+        mAnimator.start();
+    }
+}

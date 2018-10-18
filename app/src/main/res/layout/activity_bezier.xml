@@ -42,8 +42,14 @@
                     android:layout_weight="1"
                     android:background="#00f" />
 
-
             </LinearLayout>
+
+            <com.example.xiaweizi.customviewtest.view.WaveView
+                android:id="@+id/wave_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="5dp"
+                android:background="#0f0" />
 
         </LinearLayout>
     </ScrollView>
