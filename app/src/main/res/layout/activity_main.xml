@@ -44,4 +44,11 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/bt4" />
 
+    <Button
+        android:id="@+id/bt6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xfermode"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/bt5" />
 </android.support.constraint.ConstraintLayout>

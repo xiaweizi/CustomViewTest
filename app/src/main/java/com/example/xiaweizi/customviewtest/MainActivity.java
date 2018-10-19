@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt3).setOnClickListener(this);
         findViewById(R.id.bt4).setOnClickListener(this);
         findViewById(R.id.bt5).setOnClickListener(this);
+        findViewById(R.id.bt6).setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt5:
                 startActivity(new Intent(this, TelescopeActivity.class));
+                break;
+            case R.id.bt6:
+                startActivity(new Intent(this, XfermodeActivity.class));
                 break;
         }
     }
