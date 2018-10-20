@@ -6,7 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -28,9 +32,12 @@ public class WaveView extends View {
     private Path mPath = new Path();
     private int mWidth;
     private int mHeight;
-    private int mItemWidth = 1800;
+    private int mItemWidth = 1400;
     private int offsetX;
+    private int offsetY;
     private ValueAnimator mAnimator;
+    private Rect mRect = new Rect();
+    private PorterDuffXfermode mXfermode;
 
     private void initPaint() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -50,6 +57,7 @@ public class WaveView extends View {
         super(context, attrs, defStyle);
         initView(context, attrs, defStyle);
         setLayerType(LAYER_TYPE_HARDWARE, null);
+        mXfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
     }
 
     private void initAnimator() {
@@ -70,8 +78,12 @@ public class WaveView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPath.reset();
+        offsetY += 1;
+        if (offsetY >= getHeight() - 100) {
+            offsetY = 0;
+        }
         int startX = -mItemWidth + offsetX;
-        int startY = mHeight / 2;
+        int startY = mHeight - offsetY;
         int controlHeight = mHeight / 2;
         int halfWaveWidth = mItemWidth / 2;
         mPath.moveTo(startX, startY);
@@ -82,7 +94,17 @@ public class WaveView extends View {
         mPath.lineTo(mWidth, mHeight);
         mPath.lineTo(0, mHeight);
         mPath.close();
+
+        int layerId = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
+        mPaint.setColor(Color.GREEN);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, getHeight() / 2, mPaint);
+        mPaint.setXfermode(mXfermode);
+        mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.FILL);
         canvas.drawPath(mPath, mPaint);
+        mPaint.setXfermode(null);
+        canvas.restoreToCount(layerId);
     }
 
     @Override
