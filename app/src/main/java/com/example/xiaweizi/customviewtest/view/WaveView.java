@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -34,7 +33,8 @@ public class WaveView extends View {
     private int mHeight;
     private int mItemWidth = 1400;
     private int offsetX;
-    private int offsetY;
+    private int offsetY = 100;
+    private int mAddValue = 1;
     private ValueAnimator mAnimator;
     private Rect mRect = new Rect();
     private PorterDuffXfermode mXfermode;
@@ -78,16 +78,18 @@ public class WaveView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPath.reset();
-        offsetY += 1;
+        offsetY += mAddValue;
         if (offsetY >= getHeight() - 100) {
-            offsetY = 0;
+            mAddValue = -1;
+        } else if (offsetY < 100) {
+            mAddValue = 1;
         }
         int startX = -mItemWidth + offsetX;
         int startY = mHeight - offsetY;
         int controlHeight = mHeight / 2;
         int halfWaveWidth = mItemWidth / 2;
         mPath.moveTo(startX, startY);
-        for (int i = startX, j = 0; i < mWidth + mItemWidth; i+=mItemWidth, j ++) {
+        for (int i = startX, j = 0; i < mWidth + mItemWidth; i += mItemWidth, j++) {
             mPath.rQuadTo(halfWaveWidth / 2, -controlHeight, halfWaveWidth, 0);
             mPath.rQuadTo(halfWaveWidth / 2, controlHeight, halfWaveWidth, 0);
         }
