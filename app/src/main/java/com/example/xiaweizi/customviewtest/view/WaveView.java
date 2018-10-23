@@ -41,7 +41,7 @@ public class WaveView extends View {
 
     private void initPaint() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(Color.RED);
+        mPaint.setColor(Color.parseColor("#27d4fd"));
         mPaint.setStyle(Paint.Style.FILL);
     }
 
@@ -86,7 +86,7 @@ public class WaveView extends View {
         }
         int startX = -mItemWidth + offsetX;
         int startY = mHeight - offsetY;
-        int controlHeight = mHeight / 2;
+        int controlHeight = mHeight / 3;
         int halfWaveWidth = mItemWidth / 2;
         mPath.moveTo(startX, startY);
         for (int i = startX, j = 0; i < mWidth + mItemWidth; i += mItemWidth, j++) {
@@ -102,7 +102,7 @@ public class WaveView extends View {
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, getHeight() / 2, mPaint);
         mPaint.setXfermode(mXfermode);
-        mPaint.setColor(Color.RED);
+        mPaint.setColor(Color.parseColor("#27d4fd"));
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawPath(mPath, mPaint);
         mPaint.setXfermode(null);
