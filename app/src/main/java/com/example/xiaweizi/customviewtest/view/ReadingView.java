@@ -72,6 +72,7 @@ public class ReadingView extends View {
         if (mBitmap == null) {
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
             mBitmap = Bitmap.createScaledBitmap(bmp, getWidth(), getHeight(), false);
+            Log.i("bitmapSize:", "onDraw: " + mBitmap.getByteCount());
             BitmapShader shader = new BitmapShader(Bitmap.createScaledBitmap(mBitmap, mBitmap.getWidth() * FACTOR, mBitmap.getHeight() * FACTOR, true), Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             mShapeDrawable = new ShapeDrawable(new OvalShape());
             mShapeDrawable.getPaint().setShader(shader);

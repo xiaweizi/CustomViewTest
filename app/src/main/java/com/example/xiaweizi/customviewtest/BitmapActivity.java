@@ -19,7 +19,7 @@ import com.example.xiaweizi.customviewtest.common.Util;
 public class BitmapActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "BitmapActivity::";
-    private ImageView mIvBitmap;
+    private ImageView mIvBitmap, mIvBitmap1;
     private TextView mTvBitmap;
 
     @Override
@@ -27,14 +27,17 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bitmap);
         mIvBitmap = findViewById(R.id.iv_bitmap);
+        mIvBitmap1 = findViewById(R.id.iv_bitmap1);
         mTvBitmap = findViewById(R.id.tv_bitmap);
         findViewById(R.id.bt_bitmap1).setOnClickListener(this);
         findViewById(R.id.bt_bitmap2).setOnClickListener(this);
+        findViewById(R.id.bt_bitmap3).setOnClickListener(this);
     }
 
     private void saveBitmapToLocal() {
+        StringBuilder sb = new StringBuilder();
         long lastTime = System.currentTimeMillis();
-        Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
+        Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.RED);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -42,18 +45,31 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
         canvas.drawCircle(100, 100, 50, paint);
         Util.saveBitmapToLocalJPEG(this, Environment.getExternalStorageDirectory().getPath() + "/xiaweizi/", "testBitmap_" + System.currentTimeMillis(), bitmap, true);
         Log.i("saveBitmapTime::", "totalTime:\t" + (System.currentTimeMillis() - lastTime));
+        sb.append("count:\t").append(bitmap.getByteCount());
+        mTvBitmap.setText(sb.toString());
     }
 
     private void inJustDecodeBounds() {
         StringBuilder sb = new StringBuilder();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        options.inSampleSize = 4;
+        options.inSampleSize = 1;
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.background, options);
-        sb.append("bitmap:\t").append(bitmap).append("width:\t").append(options.outWidth).append("height:	").append(options.outHeight);
+        sb.append("bitmap:\t").append(bitmap).append("\nwidth:\t").append(options.outWidth).append("\nheight:	").append(options.outHeight).append("\ncount:\t").append(bitmap.getByteCount());
         mTvBitmap.setText(sb.toString());
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         mIvBitmap.setImageDrawable(drawable);
+    }
+
+    private void extractAlpha() {
+        Bitmap srcBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_nice);
+        Bitmap bitmap = Bitmap.createBitmap(srcBmp.getWidth(), srcBmp.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.CYAN);
+        canvas.drawBitmap(srcBmp.extractAlpha(), 0, 0, paint);
+        mIvBitmap.setImageBitmap(srcBmp);
+        mIvBitmap1.setImageBitmap(bitmap);
     }
 
     @Override
@@ -65,6 +81,10 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_bitmap2:
                 inJustDecodeBounds();
                 break;
+            case R.id.bt_bitmap3:
+                extractAlpha();
+                break;
         }
     }
+
 }
