@@ -1,6 +1,7 @@
 package com.example.xiaweizi.customviewtest;
 
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt6).setOnClickListener(this);
         findViewById(R.id.bt7).setOnClickListener(this);
         findViewById(R.id.bt8).setOnClickListener(this);
+        findViewById(R.id.bt9).setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt8:
                 startActivity(new Intent(this, BitmapActivity.class));
+                break;
+            case R.id.bt9:
+                startActivity(new Intent(this, MatrixsActivity.class));
                 break;
         }
     }

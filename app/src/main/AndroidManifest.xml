@@ -26,7 +26,8 @@
         <activity android:name=".TelescopeActivity" />
         <activity android:name=".XfermodeActivity" />
         <activity android:name=".EraseActivity" />
-        <activity android:name=".BitmapActivity"></activity>
+        <activity android:name=".BitmapActivity" />
+        <activity android:name=".MatrixsActivity"></activity>
     </application>
 
 </manifest>
