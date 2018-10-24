@@ -32,6 +32,7 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.bt_bitmap1).setOnClickListener(this);
         findViewById(R.id.bt_bitmap2).setOnClickListener(this);
         findViewById(R.id.bt_bitmap3).setOnClickListener(this);
+        findViewById(R.id.bt_bitmap4).setOnClickListener(this);
     }
 
     private void saveBitmapToLocal() {
@@ -72,6 +73,18 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
         mIvBitmap1.setImageBitmap(bitmap);
     }
 
+    private void createWater() {
+        StringBuilder sb = new StringBuilder();
+        long lastTime = System.currentTimeMillis();
+        Bitmap maskBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_nice);
+        Bitmap srcBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
+        Bitmap dstBmp = Util.createWaterBitmap(srcBmp, maskBmp);
+        mIvBitmap.setImageBitmap(dstBmp);
+        sb.append("totalTime:\t").append(System.currentTimeMillis()-lastTime).append("\n");
+        sb.append("totalCount:\t").append((maskBmp.getAllocationByteCount() + srcBmp.getAllocationByteCount() + dstBmp.getAllocationByteCount()) * 1f / 1024 / 1024).append("MB");
+        mTvBitmap.setText(sb.toString());
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -83,6 +96,9 @@ public class BitmapActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.bt_bitmap3:
                 extractAlpha();
+                break;
+            case R.id.bt_bitmap4:
+                createWater();
                 break;
         }
     }

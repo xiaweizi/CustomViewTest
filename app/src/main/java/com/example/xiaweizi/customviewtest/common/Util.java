@@ -2,6 +2,7 @@ package com.example.xiaweizi.customviewtest.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
@@ -69,5 +70,19 @@ public class Util {
         File dir = new File(dirName);
         dir.mkdirs();
         return dir;
+    }
+
+    public static Bitmap createWaterBitmap(Bitmap src, Bitmap maskBmp) {
+        if (src == null) return null;
+        int srcWidth = src.getWidth();
+        int srcHeight = src.getHeight();
+        int maskBmpWidth = maskBmp.getWidth();
+        int maskBmpHeight = maskBmp.getHeight();
+
+        Bitmap newBmp = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBmp);
+        canvas.drawBitmap(src, 0, 0, null);
+        canvas.drawBitmap(maskBmp, srcWidth - maskBmpWidth - 20, 20, null);
+        return newBmp;
     }
 }

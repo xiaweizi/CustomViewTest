@@ -46,6 +46,13 @@
             android:layout_height="wrap_content"
             android:text="extractAlpha"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bt_bitmap4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="createWater"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>
