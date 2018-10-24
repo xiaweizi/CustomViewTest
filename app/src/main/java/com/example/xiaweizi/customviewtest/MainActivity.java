@@ -1,17 +1,9 @@
 package com.example.xiaweizi.customviewtest;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-
-import com.example.xiaweizi.customviewtest.common.Util;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,21 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, EraseActivity.class));
                 break;
             case R.id.bt8:
-                saveBitmapToLocal();
+                startActivity(new Intent(this, BitmapActivity.class));
                 break;
         }
     }
 
-    private void saveBitmapToLocal() {
-        long lastTime = System.currentTimeMillis();
-        Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(Color.RED);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLUE);
-        canvas.drawCircle(100, 100, 50, paint);
-        Util.saveBitmapToLocalJPEG(this, Environment.getExternalStorageDirectory().getPath() + "/xiaweizi/", "testBitmap_" + System.currentTimeMillis(), bitmap, true);
-        Log.i("saveBitmapTime::", "totalTime:\t" + (System.currentTimeMillis() - lastTime));
-    }
+
 
 }

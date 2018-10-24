@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xiaweizi.customviewtest">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -26,7 +25,8 @@
         <activity android:name=".BezierActivity" />
         <activity android:name=".TelescopeActivity" />
         <activity android:name=".XfermodeActivity" />
-        <activity android:name=".EraseActivity"></activity>
+        <activity android:name=".EraseActivity" />
+        <activity android:name=".BitmapActivity"></activity>
     </application>
 
 </manifest>
