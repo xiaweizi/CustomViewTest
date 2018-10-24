@@ -11,6 +11,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -67,6 +68,7 @@ public class ReadingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        long lastTime = System.currentTimeMillis();
         if (mBitmap == null) {
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
             mBitmap = Bitmap.createScaledBitmap(bmp, getWidth(), getHeight(), false);
@@ -77,5 +79,6 @@ public class ReadingView extends View {
         }
         canvas.drawBitmap(mBitmap, 0, 0, null);
         mShapeDrawable.draw(canvas);
+        Log.i("drawReadingView::", "totalTime:\t" + (System.currentTimeMillis() - lastTime));
     }
 }
