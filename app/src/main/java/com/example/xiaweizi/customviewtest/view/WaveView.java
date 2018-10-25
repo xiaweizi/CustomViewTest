@@ -98,7 +98,7 @@ public class WaveView extends View {
         mPath.close();
 
         int layerId = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
-        mPaint.setColor(Color.GREEN);
+        mPaint.setColor(Color.parseColor("#ceb1e2"));
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, getHeight() / 2, mPaint);
         mPaint.setXfermode(mXfermode);

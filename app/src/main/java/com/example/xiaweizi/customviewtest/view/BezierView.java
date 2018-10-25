@@ -22,16 +22,19 @@ import android.view.View;
 public class BezierView extends View {
 
     private static final String TAG = "BezierView::";
-
+    private static final int TEXT_SIZE = 45;
     private Paint mPaint;
+    private Paint mTextPaint;
     private Path mPath;
-    private int controlX = 250;
-    private int controlY = 250;
+    private int controlX, controlY;
+    private int startX, startY, endX, endY;
 
     private void initPaint() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.RED);
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setTextSize(TEXT_SIZE);
     }
 
     public BezierView(Context context) {
@@ -54,22 +57,34 @@ public class BezierView extends View {
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        startX = 100;
+        startY = h -100;
+        endX = w - 100;
+        endY = h - 100;
+        controlX = w / 2;
+        controlY = h / 2;
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        int startX = 100, startY = 500;
-        int endX = 500, endY = 500;
 
         // 绘制起点位置
         mPaint.setColor(Color.RED);
         mPaint.setStrokeWidth(10);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawPoint(startX, startY, mPaint);
+        canvas.drawText("("+startX+","+startY+")", startX, startY + TEXT_SIZE, mTextPaint);
         canvas.drawPoint(endX, endY, mPaint);
+        canvas.drawText("("+endX+","+endY+")", endX, endY + TEXT_SIZE, mTextPaint);
         canvas.drawPoint(controlX, controlY, mPaint);
+        canvas.drawText("("+controlX+","+controlY+")", controlX, controlY - 50 , mTextPaint);
 
         mPath.reset();
         mPath.moveTo(startX, startY);
-        // 绘制二阶贝塞尔取消
+        // 绘制二阶贝塞尔
         mPath.quadTo(controlX, controlY, endX, endY);
         mPaint.setStrokeWidth(5);
         canvas.drawPath(mPath, mPaint);
@@ -77,11 +92,15 @@ public class BezierView extends View {
         mPaint.setColor(Color.BLUE);
         canvas.drawLine(startX, startY, controlX, controlY, mPaint);
         canvas.drawLine(controlX, controlY, endX, endY, mPaint);
+
+        String desc = "二阶贝塞尔曲线";
+        float width = mTextPaint.measureText(desc);
+        canvas.drawText(desc, getWidth() - width - 20, 120, mTextPaint);
     }
 
     public void reset() {
-        controlX = 250;
-        controlY = 250;
+        controlX = getWidth() / 2;
+        controlY = getHeight() / 2;
         invalidate();
     }
 
