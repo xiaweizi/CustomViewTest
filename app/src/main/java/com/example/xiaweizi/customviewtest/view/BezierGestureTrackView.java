@@ -23,12 +23,15 @@ public class BezierGestureTrackView extends View {
 
     private Paint mPaint;
     private Path mPath = new Path();
+    private Paint mTextPaint;
 
     private void initPaint() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(6);
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setTextSize(40);
     }
 
 
@@ -86,5 +89,8 @@ public class BezierGestureTrackView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawPath(mPath, mPaint);
+        String desc = "二阶贝塞尔手势轨迹";
+        mTextPaint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawText(desc, getWidth() - 20, 50, mTextPaint);
     }
 }

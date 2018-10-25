@@ -124,4 +124,8 @@ public class WaveView extends View {
     public void start() {
         mAnimator.start();
     }
+
+    public void stop() {
+        mAnimator.cancel();
+    }
 }

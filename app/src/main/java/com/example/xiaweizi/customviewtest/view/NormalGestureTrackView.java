@@ -22,6 +22,7 @@ import android.view.View;
 public class NormalGestureTrackView extends View {
 
     private Paint mPaint;
+    private Paint mTextPaint;
     private Path mPath = new Path();
 
     private void initPaint() {
@@ -29,6 +30,9 @@ public class NormalGestureTrackView extends View {
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(6);
+
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setTextSize(40);
     }
 
 
@@ -78,5 +82,7 @@ public class NormalGestureTrackView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawPath(mPath, mPaint);
+        String desc = "普通手势轨迹";
+        canvas.drawText(desc, 20, 50, mTextPaint);
     }
 }

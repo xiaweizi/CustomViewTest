@@ -43,11 +43,33 @@
 
             </LinearLayout>
 
-            <com.example.xiaweizi.customviewtest.view.WaveView
-                android:id="@+id/wave_view"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#ceb1e2" />
+                android:layout_height="wrap_content"
+
+                android:background="#ceb1e2">
+
+                <com.example.xiaweizi.customviewtest.view.WaveView
+                    android:id="@+id/wave_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <Button
+                    android:id="@+id/startAnimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="startAnimate"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/stopAnimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="stopAnimate"
+                    android:textAllCaps="false" />
+            </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>
@@ -56,6 +78,8 @@
         android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="reset" />
+        android:text="reset"
+        android:textAllCaps="false" />
+
 
 </android.support.constraint.ConstraintLayout>

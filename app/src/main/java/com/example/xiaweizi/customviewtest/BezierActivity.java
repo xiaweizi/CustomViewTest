@@ -24,5 +24,17 @@ public class BezierActivity extends AppCompatActivity {
                 ((WaveView) findViewById(R.id.wave_view)).start();
             }
         });
+        findViewById(R.id.startAnimate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((WaveView) findViewById(R.id.wave_view)).start();
+            }
+        });
+        findViewById(R.id.stopAnimate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((WaveView) findViewById(R.id.wave_view)).stop();
+            }
+        });
     }
 }
