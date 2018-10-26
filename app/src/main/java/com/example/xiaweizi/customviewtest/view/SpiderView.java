@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +12,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <pre>
@@ -57,19 +53,21 @@ public class SpiderView extends View {
     public SpiderView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initView(context, attrs, defStyle);
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-        executorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                new android.os.Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mData = createData();
-                        postInvalidate();
-                    }
-                });
-            }
-        }, 2, 1, TimeUnit.SECONDS);
+        mData = createData();
+        postInvalidate();
+//        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+//        executorService.scheduleAtFixedRate(new Runnable() {
+//            @Override
+//            public void run() {
+//                new android.os.Handler(Looper.getMainLooper()).post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mData = createData();
+//                        postInvalidate();
+//                    }
+//                });
+//            }
+//        }, 0, 1, TimeUnit.SECONDS);
     }
 
     private void initView(Context context, AttributeSet attrs, int defStyle) {
@@ -83,6 +81,11 @@ public class SpiderView extends View {
         mContentPaint.setStyle(Paint.Style.STROKE);
         mContentPaint.setColor(Color.CYAN);
 
+    }
+
+    public void change() {
+        mData = createData();
+        postInvalidate();
     }
 
     private List<SpiderData> createData() {

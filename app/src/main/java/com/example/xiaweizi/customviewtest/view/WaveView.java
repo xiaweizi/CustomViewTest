@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -36,7 +35,6 @@ public class WaveView extends View {
     private int offsetY = 100;
     private int mAddValue = 1;
     private ValueAnimator mAnimator;
-    private Rect mRect = new Rect();
     private PorterDuffXfermode mXfermode;
 
     private void initPaint() {

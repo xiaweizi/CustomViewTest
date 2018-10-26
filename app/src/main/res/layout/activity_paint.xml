@@ -20,10 +20,23 @@
             android:layout_height="wrap_content"
             android:text="这是一首简单的歌" />
 
-        <com.example.xiaweizi.customviewtest.view.SpiderView
-            android:background="#cfb8b8"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="wrap_content">
+
+            <com.example.xiaweizi.customviewtest.view.SpiderView
+                android:id="@+id/spider_view"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="#cfb8b8" />
+
+            <Button
+                android:id="@+id/bt_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="change"
+                android:textAllCaps="false" />
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>
